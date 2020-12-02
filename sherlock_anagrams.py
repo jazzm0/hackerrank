@@ -1,43 +1,20 @@
 import unittest
+from collections import Counter
 
 
-def anagram(s, q):
-    if len(s) != len(q):
-        return False
-
-    char_count_s = {}
-    char_count_q = {}
-
-    for i in range(len(s)):
-        char_count_s[s[i]] = char_count_s.get(s[i], 0) + 1
-        char_count_q[q[i]] = char_count_q.get(q[i], 0) + 1
-
-    for k, v in char_count_s.items():
-        if char_count_q.get(k) != v:
-            return False
-
-    return True
-
-
-def sherlockAndAnagrams(s):
+def sherlockAndAnagrams(string):
+    buckets = {}
+    for i in range(len(string)):
+        for j in range(1, len(string) - i + 1):
+            key = frozenset(Counter(string[i:i + j]).items())
+            buckets[key] = buckets.get(key, 0) + 1
     count = 0
-
-    for length in range(1, len(s)):
-        for i in range(len(s)):
-            for j in range(i + 1, len(s)):
-                if anagram(s[i:i + length], s[j:j + length]):
-                    count += 1
-
+    for key in buckets:
+        count += buckets[key] * (buckets[key] - 1) // 2
     return count
 
 
 class TestStringMethods(unittest.TestCase):
-    def test_a1(self):
-        self.assertEqual(anagram('abba', 'baba'), True)
-
-    def test_a2(self):
-        self.assertEqual(anagram('abba', 'babc'), False)
-
     def test_a(self):
         self.assertEqual(sherlockAndAnagrams('abba'), 4)
 
@@ -51,10 +28,14 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(sherlockAndAnagrams('kkkk'), 10)
 
     def test_e(self):
-        self.assertEqual(sherlockAndAnagrams('ifailuhkqqhucpoltgtyovarjsnrbfpvmupwjjjfiwwhrlkpekxxnebfrwibylcvkfealgonjkzwlyfhhkefuvgndgdnbelgruel'), 399)
+        self.assertEqual(sherlockAndAnagrams(
+            'ifailuhkqqhucpoltgtyovarjsnrbfpvmupwjjjfiwwhrlkpekxxnebfrwibylcvkfealgonjkzwlyfhhkefuvgndgdnbelgruel'),
+            399)
 
     def test_f(self):
-        self.assertEqual(sherlockAndAnagrams('zjekimenscyiamnwlpxytkndjsygifmqlqibxxqlauxamfviftquntvkwppxrzuncyenacfivtigvfsadtlytzymuwvpntngkyhw'), 428)
+        self.assertEqual(sherlockAndAnagrams(
+            'zjekimenscyiamnwlpxytkndjsygifmqlqibxxqlauxamfviftquntvkwppxrzuncyenacfivtigvfsadtlytzymuwvpntngkyhw'),
+            428)
 
 
 if __name__ == '__main__':
