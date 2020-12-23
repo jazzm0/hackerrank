@@ -19,10 +19,10 @@ def minimumLoss(price):
 
 class TestStringMethods(unittest.TestCase):
 
-    def test_a(self):  # -80 -85 -92 -98 -88
+    def test_a(self):
         self.assertEqual(minimumLoss([20, 15, 8, 2, 12]), 3)
 
-    def test_b(self):  # -13 +1 -6 +3
+    def test_b(self):
         self.assertEqual(minimumLoss([20, 7, 8, 2, 5]), 2)
 
 
