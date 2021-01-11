@@ -17,6 +17,8 @@ def minimumNumber(n, password):
     n = l = u = s = 1
 
     for p in password:
+        if n == 0 and l == 0 and u == 0 and s == 0:
+            break
         if p in numbers and n == 1:
             n = 0
         if p in lower_case and l == 1:
