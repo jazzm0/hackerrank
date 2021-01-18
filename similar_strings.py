@@ -1,32 +1,60 @@
 import unittest
 
 
-def count(s1, s2):
-    c = 0
-    minlen = min(len(s1), len(s2))
-    for i in range(minlen):
-        if s1[i] == s2[i]:
-            c += 1
+def stringSimilarity(string):
+    n = len(string)
+    z = [0] * n
+
+    # [L,R] make a window which matches
+    # with prefix of s
+    l, r, k = 0, 0, 0
+    for i in range(1, n):
+
+        # if i>R nothing matches so we will calculate.
+        # Z[i] using naive way.
+        if i > r:
+            l, r = i, i
+
+            # R-L = 0 in starting, so it will start
+            # checking from 0'th index. For example,
+            # for "ababab" and i = 1, the value of R
+            # remains 0 and Z[i] becomes 0. For string
+            # "aaaaaa" and i = 1, Z[i] and R become 5
+            while r < n and string[r - l] == string[r]:
+                r += 1
+            z[i] = r - l
+            r -= 1
         else:
-            break
-    return c
 
+            # k = i-L so k corresponds to number which
+            # matches in [L,R] interval.
+            k = i - l
 
-def stringSimilarity(s):
+            # if Z[k] is less than remaining interval
+            # then Z[i] will be equal to Z[k].
+            # For example, str = "ababab", i = 3, R = 5
+            # and L = 2
+            if z[k] < r - i + 1:
+                z[i] = z[k]
+
+                # For example str = "aaaaaa" and i = 2,
+            # R is 5, L is 0
+            else:
+
+                # else start from R and check manually
+                l = i
+                while r < n and string[r - l] == string[r]:
+                    r += 1
+                z[i] = r - l
+                r -= 1
     c = 0
-    for i in range(len(s)):
-        c += count(s, s[i:])
 
-    return c
+    for i in z:
+        c += i
+    return c + n
 
 
 class TestStringMethods(unittest.TestCase):
-
-    def test_a1(self):
-        self.assertEqual(count("abc", "abd"), 2)
-
-    def test_a2(self):
-        self.assertEqual(count("aaa", "aaab"), 3)
 
     def test_a(self):
         self.assertEqual(stringSimilarity("ababaa"), 11)
