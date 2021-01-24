@@ -1,6 +1,13 @@
 import unittest
 from collections import Counter
-from math import factorial
+
+p = 1000000007
+limit = 100000
+
+f = [1] * limit
+
+for i in range(1, limit):
+    f[i] = f[i - 1] * i
 
 
 def answerQuery(l, r, s):
@@ -8,28 +15,34 @@ def answerQuery(l, r, s):
 
     singles = 0
     even = 0
+    d = list()
 
     for k, v in c.items():
         if v == 1:
             singles += v
             continue
+
+        divisor = v // 2
+
         if v % 2 == 0:
             even += v
         else:
             singles += 1
             even += v - 1
+            divisor = (v - 1) // 2
 
-    even = factorial(even / 2)
-    for k, v in c.items():
-        if v % 2 == 0:
-            even //= factorial(v / 2)
-        elif v > 1:
-            even //= factorial((v - 1) / 2)
+        d.append(divisor)
+
+    even = f[even // 2]
+    product = 1
+
+    for divisor in d:
+        product *= f[divisor]
 
     if singles == 0:
         singles = 1
 
-    return int(even * singles) % 1000000007
+    return ((even // product) * singles) % p
 
 
 class TestStringMethods(unittest.TestCase):
