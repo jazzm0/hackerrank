@@ -12,12 +12,9 @@ cnt = [{} for i in range(limit)]
 
 
 def initialize(s):
-    n = len(s)
-
-    for i in range(0, n):
+    cnt[0][s[0]] = 1
+    for i in range(1, len(s)):
         cnt[i][s[i]] = cnt[i].get(s[i], 0) + 1
-
-    for i in range(1, n):
         for k, v in cnt[i - 1].items():
             cnt[i][k] = cnt[i].get(k, 0) + v
 
