@@ -2,7 +2,15 @@ import unittest
 
 
 def arrayManipulation(n, queries):
-    return 0
+    a = [0] * n
+    for q in queries:
+        for i in range(q[0] - 1, q[1]):
+            a[i] += q[2]
+
+    result = 0
+    for i in range(n):
+        result = max(result, a[i])
+    return result
 
 
 class TestStringMethods(unittest.TestCase):
