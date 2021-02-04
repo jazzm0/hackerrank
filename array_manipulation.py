@@ -2,14 +2,21 @@ import unittest
 
 
 def arrayManipulation(n, queries):
-    a = [0] * n
-    for q in queries:
-        for i in range(q[0] - 1, q[1]):
-            a[i] += q[2]
+    a = {(queries[0][0], queries[0][1]): queries[0][2]}
+    for q in range(1, len(queries)):
+        overlap = False
+        for k, v in a.items():
+            if (k[0] <= queries[q][0] <= k[1]) or \
+                    (k[0] <= queries[q][1] <= k[1]) or \
+                    (k[0] >= queries[q][0] or queries[q][0] >= k[1]):
+                a[k] += queries[q][2]
+                overlap = True
+        if not overlap:
+            a[(queries[q][0], queries[q][1])] = queries[q][2]
 
     result = 0
-    for i in range(n):
-        result = max(result, a[i])
+    for k, v in a.items():
+        result = max(result, v)
     return result
 
 
@@ -28,6 +35,14 @@ class TestStringMethods(unittest.TestCase):
                                             [2, 5, 100],
                                             [3, 4, 100]
                                             ]), 200)
+
+    def test_c(self):
+        self.assertEqual(arrayManipulation(10,
+                                           [[2, 6, 8],
+                                            [3, 5, 7],
+                                            [1, 8, 1],
+                                            [5, 9, 15]
+                                            ]), 31)
 
 
 if __name__ == '__main__':
