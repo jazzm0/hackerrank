@@ -2,19 +2,20 @@ import unittest
 
 
 def commonChild(s1, s2):
-    n = len(s1)
-    c = [[0] * (n + 1) for i in range(n + 1)]
-    m = 0
+    s1_len = len(s1)
+    s2_len = len(s2)
 
-    for i in range(1, n + 1):
-        for j in range(1, n + 1):
+    lcs = [[0 for _ in range(s1_len + 1)]
+           for _ in range(s2_len + 1)]
+
+    for i in range(1, s1_len + 1):
+        for j in range(1, s2_len + 1):
             if s1[i - 1] == s2[j - 1]:
-                c[i][j] = c[i - 1][j - 1] + 1
+                lcs[i][j] = lcs[i - 1][j - 1] + 1
             else:
-                c[i][j] = max(c[i][j - 1], c[i - 1][j])
-            m = max(m, c[i][j])
+                lcs[i][j] = max(lcs[i - 1][j], lcs[i][j - 1])
 
-    return m
+    return lcs[s1_len][s2_len]
 
 
 class TestStringMethods(unittest.TestCase):
@@ -26,7 +27,7 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(commonChild('AA', 'BB'), 0)
 
     def test_c(self):
-        self.assertEqual(commonChild('SHINCHAN', 'NOHARAAA'), 3)
+        self.assertEqual(commonChild('SHINCHAN', 'NOHARAAA'), 3)  # NHA
 
     def test_d(self):
         self.assertEqual(commonChild('ABCDEF', 'FBDAMN'), 2)
@@ -35,6 +36,9 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(commonChild(
             'ELGGYJWKTDHLXJRBJLRYEJWVSUFZKYHOIKBGTVUTTOCGMLEXWDSXEBKRZTQUVCJNGKKRMUUBACVOEQKBFFYBUQEMYNENKYYGUZSP',
             'FRVIFOVJYQLVZMFBNRUTIYFBMFFFRZVBYINXLDDSVMPWSQGJZYTKMZIPEGMVOUQBKYEWEYVOLSHCMHPAZYTENRNONTJWDANAMFRX'), 27)
+
+    def test_f(self):
+        self.assertEqual(commonChild('ABCD', 'ABDC'), 3)
 
 
 if __name__ == '__main__':
