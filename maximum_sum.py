@@ -2,16 +2,15 @@ import unittest
 
 
 def maximumSum(a, m):
-    for i in range(len(a)):
-        a[i] %= m
-
-    max_value = 0
-    for i in range(len(a)):
-        current_value = 0
-        for j in range(i, len(a)):
-            current_value = (current_value + a[j]) % m
-            max_value = max(max_value, current_value)
-    return max_value
+    prefixSum = [(a[0] % m, 1)]
+    for i in range(1, len(a)):
+        prefixSum.append(((prefixSum[i - 1][0] + a[i] % m) % m, i + 1))
+    prefixSum.sort()
+    loopMin = m
+    for i in range(len(prefixSum) - 1):
+        if prefixSum[i][1] > prefixSum[i + 1][1] and prefixSum[i + 1][0] - prefixSum[i][0] < loopMin:
+            loopMin = prefixSum[i + 1][0] - prefixSum[i][0]
+    return max(prefixSum[-1][0], m - loopMin)
 
 
 class TestStringMethods(unittest.TestCase):
