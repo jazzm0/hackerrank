@@ -16,6 +16,9 @@ class TestStringMethods(unittest.TestCase):
     def test_b(self):
         self.assertEqual(getWays(4, [3, 1, 2]), 4)
 
+    def test_c(self):
+        self.assertEqual(getWays(12, [1, 2, 5, 10]), 15)
+
 
 if __name__ == '__main__':
     unittest.main()
