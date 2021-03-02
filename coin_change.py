@@ -4,8 +4,15 @@ import unittest
 # https://www.hackerrank.com/challenges/coin-change
 
 def getWays(n, c):
-    ways = 0
-    return ways
+    table = [0 for _ in range(n + 1)]
+
+    table[0] = 1
+
+    for i in range(0, len(c)):
+        for j in range(c[i], n + 1):
+            table[j] += table[j - c[i]]
+
+    return table[n]
 
 
 class TestStringMethods(unittest.TestCase):
