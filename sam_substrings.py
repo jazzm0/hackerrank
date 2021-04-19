@@ -6,15 +6,13 @@ p = pow(10, 9) + 7
 
 
 def substrings(s):
-    sum = 0
-    actual_len = 1
-
-    while actual_len <= len(s):
-        for i in range(0, len(s) - actual_len + 1):
-            sum += int(s[i:i + actual_len]) % p
-        actual_len += 1
-        
-    return sum % p
+    size = len(s)
+    prev = int(s[0])
+    total = prev
+    for i in range(1, size):
+        total = (total * 10 + int(s[i]) * (i + 1)) % p
+        prev = (total + prev) % p
+    return prev
 
 
 class TestStringMethods(unittest.TestCase):
