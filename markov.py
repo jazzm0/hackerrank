@@ -7,13 +7,13 @@ import numpy as np
 def solution(m):
     if len(m) < 2:
         return [1, 1]
-    r_subm, q_subm = split_martix(m)
+    r_subm, q_subm = split_matrix(m)
     f_subm = calc_f(q_subm)
     fr_subm = np.dot(f_subm, r_subm)
     return dec_to_frac_with_lcm(fr_subm[0])
 
 
-def split_martix(m):
+def split_matrix(m):
     absorbing = set()
     for row_i in range(len(m)):
         if sum(m[row_i]) == 0:
