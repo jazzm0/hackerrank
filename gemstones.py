@@ -8,6 +8,7 @@ from collections import Counter
 def gemstones(arr):
     counter_list = []
     common_keys = set()
+    minimum_count = {}
 
     for i in range(len(arr)):
         character_count = Counter(arr[i])
@@ -18,10 +19,6 @@ def gemstones(arr):
             common_keys = common_keys & character_count.keys()
             if len(common_keys) == 0:
                 return 0
-
-    minimum_count = {}
-    if len(common_keys) == 0:
-        return 0
 
     for i in range(len(counter_list)):
         for k, v in counter_list[i].items():
