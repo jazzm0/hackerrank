@@ -1,5 +1,4 @@
 import unittest
-from collections import Counter
 
 
 # https://www.hackerrank.com/challenges/gem-stones
@@ -27,9 +26,6 @@ def closestNumbers(arr):
         print(v[1], end=' ')
 
     return tuple_list
-
-
-# Write your code here
 
 
 class TestStringMethods(unittest.TestCase):
