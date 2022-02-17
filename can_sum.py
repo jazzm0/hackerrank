@@ -1,43 +1,52 @@
 import unittest
 
 
-def can_sum(n, arr, memo={}):
-    if n in memo.keys():
-        return memo[n]
+def can_sum(target, coins, memo=None):
+    if memo is None:
+        memo = {}
 
-    if n == 0:
+    if target == 0:
         return True
 
-    if n < 0:
+    if target < 0:
         return False
 
-    for a in arr:
-        if (n - a) in memo.keys():
-            return memo[n - a]
-        if can_sum(n - a, arr):
-            memo[n] = True
-            return True
+    if target in memo:
+        return memo[target]
 
-    memo[n] = False
+    for i in range(len(coins)):
+        if coins[i] <= target:
+            result = can_sum(target - coins[i], coins, memo)
+            if result:
+                return result
+            else:
+                memo[target] = result
+
     return False
 
 
 class TestStringMethods(unittest.TestCase):
 
     def test_a(self):
-        self.assertEqual(can_sum(7, [2, 4, 3, 5, 7]), True)
+        self.assertEqual(can_sum(1, [1, 2, 5]), True)
 
     def test_b(self):
-        self.assertEqual(can_sum(300, [2, 4, 3, 5, 7]), True)
+        self.assertEqual(can_sum(3, [1, 2, 5]), True)
 
     def test_c(self):
-        self.assertEqual(can_sum(1000, [3, 4, 7, 5]), True)
+        self.assertEqual(can_sum(3, [1, 2, 5]), True)
 
     def test_d(self):
-        self.assertEqual(can_sum(300, [7, 14]), False)
+        self.assertEqual(can_sum(3, [2, 5]), False)
+
+    def test_e(self):
+        self.assertEqual(can_sum(17, [2, 8]), False)
+
+    def test_f(self):
+        self.assertEqual(can_sum(1007, [2, 8]), False)
 
     def test_g(self):
-        self.assertEqual(can_sum(301, [5, 25]), False)
+        self.assertEqual(can_sum(7, [5, 3, 4, 7]), True)
 
 
 if __name__ == '__main__':
