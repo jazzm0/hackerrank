@@ -48,6 +48,9 @@ class TestStringMethods(unittest.TestCase):
     def test_g(self):
         self.assertEqual(can_sum(7, [5, 3, 4, 7]), True)
 
+    def test_h(self):
+        self.assertEqual(can_sum(300, [14, 7]), False)
+
 
 if __name__ == '__main__':
     unittest.main()

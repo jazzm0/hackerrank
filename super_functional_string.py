@@ -1,17 +1,21 @@
 import unittest
-from collections import Counter
 
+
+# https://www.hackerrank.com/challenges/super-functional-strings
 
 def superFunctionalStrings(s):
     modulo = 10 ** 9 + 7
     result = 0
-    seen = set()
+    seen = {}
     for current_length in range(1, len(s) + 1):
         for i in range(len(s) - current_length + 1):
-            if s[i:i + current_length] not in seen:
-                seen.add(s[i:i + current_length])
-                counts = Counter(s[i:i + current_length])
-                result += current_length ** len(counts) % modulo
+            string = s[i:i + current_length]
+            if string not in seen:
+                counts = seen.get(string[:-1], {})
+                counts_copy = counts.copy()
+                counts_copy[string[-1]] = counts_copy.get(string[-1], 0) + 1
+                seen[string] = counts_copy
+                result += current_length ** len(counts_copy) % modulo
 
     return result % modulo
 
@@ -31,7 +35,8 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(superFunctionalStrings('swokbwzbur'), 112609122)
 
     def test_e(self):
-        self.assertEqual(superFunctionalStrings('yyracwirtwjhpyatphxrxzptxitgiweiiweipzwjtjcxhgagyrhhrcicyzjggijgrwitwijtjrpxhgzhatgyxhgxyhjcttxwzrehprrejxiwrttwaepgartcjeageacphhxeraixjgwpjpaherxatgipptgyhyyihaipitzxxrywrpaeewwxrcigxayaijwceiwrcjhczehjxhzpziyxpgcrhtchxytihpptjarrwwjghycjextzjhxaghapywxaxajzyygpzyicczgtgggcgrceayzyayethxrxjaigiyphhygzhejiytgcwhwhwzexczzjgxrawxpxwgyywrzgepxayzhxwiythhhiprrixe'),
+        self.assertEqual(superFunctionalStrings(
+            'yyracwirtwjhpyatphxrxzptxitgiweiiweipzwjtjcxhgagyrhhrcicyzjggijgrwitwijtjrpxhgzhatgyxhgxyhjcttxwzrehprrejxiwrttwaepgartcjeageacphhxeraixjgwpjpaherxatgipptgyhyyihaipitzxxrywrpaeewwxrcigxayaijwceiwrcjhczehjxhzpziyxpgcrhtchxytihpptjarrwwjghycjextzjhxaghapywxaxajzyygpzyicczgtgggcgrceayzyayethxrxjaigiyphhygzhejiytgcwhwhwzexczzjgxrawxpxwgyywrzgepxayzhxwiythhhiprrixe'),
                          5972473)
 
 
