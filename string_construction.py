@@ -1,33 +1,13 @@
 import unittest
+from collections import Counter
 
 
 # https://www.hackerrank.com/challenges/string-construction
 
+
 def stringConstruction(s):
-    cost = 0
-    i = 0
-    p = ''
-    length_s = len(s)
-    seen = set()
-    while i < length_s:
-        length = 1
-        while s[i:i + length] in p and length < len(p):
-            length += 1
-
-        if length > 1 and s[i:i + length] not in p:
-            length -= 1
-
-        p = p + s[i:i + length]
-
-        if length == 1 and s[i] not in seen:
-            cost += 1
-
-        for c in s[i:i + length]:
-            seen.add(c)
-
-        i += length
-
-    return cost
+    counts = Counter(s)
+    return len(counts)
 
 
 class TestStringMethods(unittest.TestCase):
