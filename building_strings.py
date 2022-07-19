@@ -34,13 +34,22 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(buildString(8, 9, 'bacbacacb'), 42)
 
     def test_c(self):
-        self.assertEqual(buildString(2709, 2712, 'caackncaacknggikncaacknggaacknggikncaackggikncaacknggaacknggikncakqoaacknggikncacggihikncaomhikncaom'), 65040)
+        self.assertEqual(buildString(2709, 2712,
+                                     'caackncaacknggikncaacknggaacknggikncaackggikncaacknggaacknggikncakqoaacknggikncacggihikncaomhikncaom'),
+                         65040)
 
     def test_d(self):
-        self.assertEqual(buildString(7890, 7891, 'acbcrsjcrscrsjcrcbcrsjcrscrsjccbcrsjcrscrsjcrcbcrsjrscrsjcrcbcrsjcrscrsjccbcrsjcrscrsjcrcbcsbcbcrsjh'), 126246)
+        self.assertEqual(buildString(7890, 7891,
+                                     'acbcrsjcrscrsjcrcbcrsjcrscrsjccbcrsjcrscrsjcrcbcrsjrscrsjcrcbcrsjcrscrsjccbcrsjcrscrsjcrcbcsbcbcrsjh'),
+                         126246)
 
     def test_e(self):
-        self.assertEqual(buildString(7078, 7078, 'abbciabbcabciabbcmabbciabbcahlbchgcmabbcmggcmababciabbcagerafrciabbcsrhgcmcabciabbchgcmabbcmsfabcmsr'), 268964)
+        self.assertEqual(buildString(7078, 7078,
+                                     'abbciabbcabciabbcmabbciabbcahlbchgcmabbcmggcmababciabbcagerafrciabbcsrhgcmcabciabbchgcmabbcmsfabcmsr'),
+                         268964)
+
+    def test_f(self):
+        self.assertEqual(buildString(10, 11, 'cbcjbcbcjh'), 71)
 
 
 if __name__ == '__main__':
