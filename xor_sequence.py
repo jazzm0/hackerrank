@@ -1,16 +1,28 @@
 import unittest
 
+
 # https://www.hackerrank.com/challenges/xor-se
 
-A = [0] * 10 ** 5
-for i in range(1, len(A)):
-    A[i] = A[i - 1] ^ i
+# A = [0] * 10 ** 5
+# for i in range(1, len(A)):
+#     A[i] = A[i - 1] ^ i
+
+
+def index(ind):
+    if ind % 4 == 0:
+        return ind
+    if ind % 4 == 1:
+        return 1
+    if ind % 4 == 2:
+        return ind + 1
+    if ind % 4 == 3:
+        return 0
 
 
 def xorSequence(l, r):
-    result = A[l]
+    result = index(l)
     for j in range(l + 1, r + 1):
-        result ^= A[j]
+        result ^= index(j)
     return result
 
 
