@@ -9,14 +9,14 @@ import unittest
 
 
 def index(ind):
-    if ind % 4 == 0:
-        return ind
-    if ind % 4 == 1:
-        return 1
-    if ind % 4 == 2:
-        return ind + 1
-    if ind % 4 == 3:
-        return 0
+    values = {
+        0: ind,
+        1: 1,
+        2: ind + 1,
+        3: 0,
+    }
+
+    return values.get(ind % 4)
 
 
 def xorSequence(l, r):
@@ -35,7 +35,7 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(xorSequence(2, 8), 9)
 
     def test_c(self):
-        self.assertEqual(xorSequence(5, 9), 15)
+        self.assertEqual(xorSequence(5, 25), 31)
 
 
 if __name__ == '__main__':
