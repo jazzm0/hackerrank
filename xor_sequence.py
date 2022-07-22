@@ -10,19 +10,17 @@ import unittest
 
 def index(ind):
     values = {
-        0: ind,
-        1: 1,
-        2: ind + 1,
-        3: 0,
+        **dict.fromkeys([0, 1], ind),
+        **dict.fromkeys([2, 3], 2),
+        **dict.fromkeys([4, 5], ind + 2),
+        **dict.fromkeys([6, 7], 0),
     }
 
-    return values.get(ind % 4)
+    return values.get(ind % 8)
 
 
-def xorSequence(l, r):
-    result = index(l)
-    for j in range(l + 1, r + 1):
-        result ^= index(j)
+def xorSequence(left, right):
+    result = index(right) ^ index(left - 1)
     return result
 
 
