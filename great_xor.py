@@ -1,7 +1,7 @@
 import unittest
 
 
-# https://www.hackerrank.com/challenges/maximizing-xor/
+# https://www.hackerrank.com/challenges/the-great-xor
 
 def shift_bit_length(x):
     return 1 << (x - 1).bit_length()
