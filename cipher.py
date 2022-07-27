@@ -21,22 +21,21 @@ import unittest
 def cipher(k, s):
     total_length = len(s)
     decrypted = ['0'] * total_length
-    p = 0
+    p = n = 0
     for i in range(k):
-        actual = int(s[total_length - i - 1])
-        decrypted[total_length - i - 1] = str(actual ^ p)
-        p = actual
+        suffix = int(s[total_length - i - 1])
+        prefix = int(s[i])
+        decrypted[total_length - i - 1] = str(suffix ^ p)
+        if i < k:
+            decrypted[i + k - 1] = str(prefix ^ n)
+        n = prefix
+        p = suffix
 
-    n = 0
-    for i in range(k - 1):
-        actual = int(s[i])
-        decrypted[i + k - 1] = str(actual ^ n)
-        n = actual
-
-    left = total_length - 3 * k + 2
     xor = 0
     for j in range(k - 1):
         xor ^= int(decrypted[j + k - 1])
+
+    left = total_length - 3 * k + 2
 
     for i in range(left):
         decrypted[2 * k + i - 2] = str(xor ^ int(s[i + k - 1]))
