@@ -22,18 +22,16 @@ def cipher(k, s):
     total_length = len(s)
     decrypted = ['0'] * total_length
     p = n = 0
-    for i in range(k):
-        suffix = int(s[total_length - i - 1])
-        prefix = int(s[i])
-        decrypted[total_length - i - 1] = str(suffix ^ p)
-        if i < k:
-            decrypted[i + k - 1] = str(prefix ^ n)
-        n = prefix
-        p = suffix
-
     xor = 0
-    for j in range(k - 1):
-        xor ^= int(decrypted[j + k - 1])
+    for i in range(k):
+        suffix = int(s[-i - 1])
+        decrypted[-i - 1] = str(suffix ^ p)
+        p = suffix
+        if i < k - 1:
+            prefix = int(s[i])
+            decrypted[i + k - 1] = str(prefix ^ n)
+            xor ^= int(decrypted[i + k - 1])
+            n = prefix
 
     left = total_length - 3 * k + 2
 
@@ -41,10 +39,7 @@ def cipher(k, s):
         decrypted[2 * k + i - 2] = str(xor ^ int(s[i + k - 1]))
         xor = xor ^ int(decrypted[2 * k + i - 2]) ^ int(decrypted[k + i - 1])
 
-    decrypted_result = ''
-    for i in range(total_length - k + 1):
-        decrypted_result += decrypted[i + k - 1]
-    return decrypted_result
+    return str(''.join(decrypted[k - 1:]))
 
 
 class TestStringMethods(unittest.TestCase):
