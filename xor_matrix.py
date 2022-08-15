@@ -10,16 +10,19 @@ import unittest
 # 1|0|1
 # 1|1|0
 
-
-def xorMatrix(m, row):
-    n = len(row)
-    new_row = [0] * n
-    for r in range(m - 1):
-        for i in range(n):
-            new_row[i] = row[i] ^ row[(i + 1) % n]
-        row = new_row
-        new_row = [0] * n
-    return row
+def xorMatrix(m, first_row):
+    n = len(first_row)
+    m -= 1
+    mb = str(bin(m))[2:]
+    lmb = len(mb)
+    result = first_row.copy()
+    for i in range(lmb):
+        if mb[i] == '1':
+            tmp = result.copy()
+            offset = 2 ** (lmb - 1 - i)
+            for j in range(n):
+                result[j] = tmp[j] ^ tmp[(j + offset) % n]
+    return result
 
 
 class TestStringMethods(unittest.TestCase):
