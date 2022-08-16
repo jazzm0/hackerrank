@@ -10,14 +10,20 @@ def fill_region(matrix, i, j, region_id):
         ind_j = 0
         while ind_j < len(matrix[0]):
             if matrix[ind_i][ind_j] == 1 and ((ind_i == i and ind_j == j)
-              or (ind_j > 0 and matrix[ind_i][ind_j - 1] == region_id)  # left
-              or (ind_i > 0 and ind_j > 0 and matrix[ind_i - 1][ind_j - 1] == region_id)  # up-left
-              or (ind_i > 0 and matrix[ind_i - 1][ind_j] == region_id)  # up
-              or (ind_i > 0 and ind_j + 1 < len(matrix[0]) and matrix[ind_i - 1][ind_j + 1] == region_id)  # up-right
-              or (ind_j + 1 < len(matrix[0]) and (matrix[ind_i][ind_j + 1] == region_id))  # right
-              or (ind_i + 1 < len(matrix) and ind_j + 1 < len(matrix[0]) and matrix[ind_i + 1][ind_j + 1] == region_id)  # down-right
-              or (ind_i + 1 < len(matrix) and matrix[ind_i + 1][ind_j] == region_id)  # down
-              or (ind_i + 1 < len(matrix) and ind_j > 0 and matrix[ind_i + 1][ind_j - 1] == region_id)  # down-left
+                                              or (ind_j > 0 and matrix[ind_i][ind_j - 1] == region_id)  # left
+                                              or (ind_i > 0 and ind_j > 0 and matrix[ind_i - 1][
+                        ind_j - 1] == region_id)  # up-left
+                                              or (ind_i > 0 and matrix[ind_i - 1][ind_j] == region_id)  # up
+                                              or (ind_i > 0 and ind_j + 1 < len(matrix[0]) and matrix[ind_i - 1][
+                        ind_j + 1] == region_id)  # up-right
+                                              or (ind_j + 1 < len(matrix[0]) and (
+                            matrix[ind_i][ind_j + 1] == region_id))  # right
+                                              or (ind_i + 1 < len(matrix) and ind_j + 1 < len(matrix[0]) and
+                                                  matrix[ind_i + 1][ind_j + 1] == region_id)  # down-right
+                                              or (ind_i + 1 < len(matrix) and matrix[ind_i + 1][
+                        ind_j] == region_id)  # down
+                                              or (ind_i + 1 < len(matrix) and ind_j > 0 and matrix[ind_i + 1][
+                        ind_j - 1] == region_id)  # down-left
             ):
 
                 matrix[ind_i][ind_j] = region_id

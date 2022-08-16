@@ -1,5 +1,5 @@
-import unittest
 import string
+import unittest
 
 
 # https://www.hackerrank.com/challenges/weighted-uniform-string

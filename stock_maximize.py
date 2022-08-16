@@ -6,15 +6,24 @@ import unittest
 sys.setrecursionlimit(5000)
 
 
-def stockmax(prices):
-    m = prices.pop()
-    maxsum = 0
-    arrsum = 0
-    for p in reversed(prices):
-        m = max(m, p)
-        maxsum += m
-        arrsum += p
-    return maxsum - arrsum
+def stockmax(prices, day=0, share_count=0, profit=0, cost=0, memo=None):
+    if memo is None:
+        memo = {}
+
+    if (day, share_count, profit, cost) in memo:
+        return memo[(day, share_count, profit, cost)]
+
+    memo[(day, share_count, profit, cost)] = profit + share_count * prices[day] - cost
+
+    if day == (len(prices) - 1):
+        return memo[(day, share_count, profit, cost)]
+
+    profit = max(
+        max(stockmax(prices, day + 1, share_count + 1, profit, cost + prices[day], memo),
+            stockmax(prices, day + 1, 0, profit + share_count * prices[day], cost, memo)),
+        stockmax(prices, day + 1, share_count, profit, cost, memo))
+
+    return profit
 
 
 class TestStringMethods(unittest.TestCase):

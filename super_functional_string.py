@@ -37,7 +37,7 @@ class TestStringMethods(unittest.TestCase):
     def test_e(self):
         self.assertEqual(superFunctionalStrings(
             'yyracwirtwjhpyatphxrxzptxitgiweiiweipzwjtjcxhgagyrhhrcicyzjggijgrwitwijtjrpxhgzhatgyxhgxyhjcttxwzrehprrejxiwrttwaepgartcjeageacphhxeraixjgwpjpaherxatgipptgyhyyihaipitzxxrywrpaeewwxrcigxayaijwceiwrcjhczehjxhzpziyxpgcrhtchxytihpptjarrwwjghycjextzjhxaghapywxaxajzyygpzyicczgtgggcgrceayzyayethxrxjaigiyphhygzhejiytgcwhwhwzexczzjgxrawxpxwgyywrzgepxayzhxwiythhhiprrixe'),
-                         5972473)
+            5972473)
 
 
 if __name__ == '__main__':
