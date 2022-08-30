@@ -7,10 +7,9 @@ def getMinimumCost(k, c):
     c = sorted(c, reverse=True)
     result = 0
     multiplier = 1
-    for i in range(len(c)):
-        result += c[i] * multiplier
-        if (i + 1) % k == 0:
-            multiplier += 1
+    for i in range(0, len(c), k):
+        result += sum(c[i:i + k]) * multiplier
+        multiplier += 1
     return result
 
 
