@@ -28,17 +28,24 @@ def knightlOnAChessboard(n):
     start = (0, 0)
     end = (n - 1, n - 1)
     overall_result = []
+
     for a in range(1, n):
         result = []
+
         for b in range(1, n):
+
             visited_locations = {start}
             new_locations = knight(a, b, start, n)
             length = 1
+
             while len(new_locations) != 0:
                 all_new_locations = set()
+
                 for location in new_locations:
+
                     visited_locations.add(location)
                     temp_new_locations = knight(a, b, location, n)
+
                     for temp in temp_new_locations:
                         if temp not in visited_locations:
                             all_new_locations.add(temp)
