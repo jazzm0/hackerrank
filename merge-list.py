@@ -2,6 +2,8 @@ import unittest
 from math import comb
 
 
+# https://www.hackerrank.com/challenges/merge-list
+
 def solve(n, m):
     return comb(n + m, m) % (10 ** 9 + 7)
 

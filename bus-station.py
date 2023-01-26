@@ -1,10 +1,12 @@
 import unittest
 
 
+# https://www.hackerrank.com/challenges/bus-station
+
 def solve(a):
     result = []
     s = sum(a)
-    
+
     for x in range(1, s + 1):
         if s % x != 0:
             continue
