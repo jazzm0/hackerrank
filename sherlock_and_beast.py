@@ -3,9 +3,14 @@ import unittest
 
 # https://www.hackerrank.com/challenges/sherlock-and-the-beast
 
+def output(n):
+    print(n)
+    return n
+
+
 def decentNumber(n):
     if n < 3:
-        return -1
+        return output(-1)
 
     count_five = n // 3
 
@@ -13,11 +18,12 @@ def decentNumber(n):
         count_five -= 1
 
     if count_five == 0 and n % 5 != 0:
-        return -1
+        return output(-1)
 
     f = ['5'] * count_five * 3
     t = ['3'] * (n - count_five * 3)
-    return int(''.join(f + t))
+    solution = int(''.join(f + t))
+    return output(solution)
 
 
 class TestStringMethods(unittest.TestCase):
@@ -39,11 +45,11 @@ class TestStringMethods(unittest.TestCase):
                          55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555533333)
 
     def test_f(self):
-        self.assertEqual(decentNumber(100),
-                         5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555553333333333)
+        self.assertEqual(decentNumber(1), -1)
 
     def test_g(self):
-        self.assertEqual(decentNumber(4), -1)
+        self.assertEqual(decentNumber(100),
+                         5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555553333333333)
 
 
 if __name__ == '__main__':
