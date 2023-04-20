@@ -7,30 +7,31 @@ from bisect import bisect_left
 def sherlockAndMinimax(arr, p, q):
     arr.sort()
     n = len(arr)
-    differences = []
+    max_distance, max_position = 0, -1
 
     position = bisect_left(arr, q, 0, n)
+
     if position < n:
-        differences.append((min(arr[position] - q, q - arr[position - 1]), q))
+        distance = min(arr[position] - q, q - arr[position - 1])
+        max_distance, max_position = distance, q
 
     if p < arr[0]:
-        differences.append((arr[0] - p, p))
+        distance = arr[0] - p
+        if distance > max_distance or (distance == max_distance and p < max_position):
+            max_distance, max_position = distance, p
 
     if q > arr[n - 1]:
-        differences.append((q - arr[n - 1], q))
+        distance = q - arr[n - 1]
+        if distance > max_distance or (distance == max_distance and q < max_position):
+            max_distance, max_position = distance, q
 
     for i in range(n - 1):
         position = (arr[i] + arr[i + 1]) // 2
-        min_distance = min(arr[i + 1] - position, position - arr[i])
-        if p <= position <= q:
-            differences.append((min_distance, position))
+        distance = min(arr[i + 1] - position, position - arr[i])
+        if p <= position <= q and (distance > max_distance or (distance == max_distance and position < max_position)):
+            max_distance, max_position = distance, position
 
-    differences.sort(reverse=True)
-    i = 1
-    while i < len(differences) and differences[0][0] == differences[i][0]:
-        i += 1
-
-    return differences[i - 1][1]
+    return max_position
 
 
 class TestStringMethods(unittest.TestCase):
