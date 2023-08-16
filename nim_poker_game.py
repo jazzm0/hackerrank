@@ -3,7 +3,7 @@ import unittest
 # https://www.hackerrank.com/challenges/poker-nim-1
 
 
-first, second = 'First', 'Second'
+first, second = "First", "Second"
 
 
 def pokerNim(k, c):
@@ -19,7 +19,6 @@ def pokerNim(k, c):
 
 
 class TestStringMethods(unittest.TestCase):
-
     def test_a(self):
         self.assertEqual(pokerNim(5, [1, 2]), first)
 
@@ -27,5 +26,5 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(pokerNim(5, [2, 1, 3]), second)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
