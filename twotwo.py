@@ -3,17 +3,43 @@ import unittest
 
 # https://www.hackerrank.com/challenges/two-two/
 
+tree = [False, {}]
+
+
+def add(word):
+    current = tree
+    for c in word:
+        try:
+            current = current[1][c]
+        except KeyError:
+            current[1][c] = [False, {}]
+            current = current[1][c]
+    current[0] = True
+
+
+def count(word):
+    count = 0
+    for start in range(len(word)):
+        current, index = tree, start
+        while True:
+            if current[0]:
+                count += 1
+            try:
+                current = current[1][word[index]]
+                index += 1
+            except (KeyError, IndexError):
+                break
+    return count
+
+
+v = 1
+for x in range(801):
+    add(str(v)[::-1])
+    v <<= 1
+
 
 def twoTwo(a):
-    res = 0
-    for length in range(1, len(a) + 1):
-        for index in range(0, len(a) - length + 1):
-            if a[index] == "0":
-                continue
-            number = int(a[index : index + length])
-            if number != 0 and number & (number - 1) == 0:
-                res += 1
-    return res
+    return count(a[::-1])
 
 
 class TestStringMethods(unittest.TestCase):
